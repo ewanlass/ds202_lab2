@@ -5,26 +5,52 @@ date: "9/18/2019"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, eval=FALSE}
+recent_rating = choco[choco$Review.Date>2011,]
+#It creates a new data frame that includes all the review rating after 2011
+
+unique(recent_rating$Company.Location) # NOTICE: how many countries are listed but how many levels are there? 
+#It reveals the different location of different companties in the "recent_ratings" data frame.
+
+recent_rating$Company.Location = droplevels(recent_rating$Company.Location)
+#It taking away the levels (countries that don't have applicable data point) from the data frame. Both levels and cournties are the same
+
+head(recent_rating)
+# gives the first 6 values of the data frame "recent_rating"
+
+cross_table = table(recent_rating$Review.Date,recent_rating$Company.Location)
+cross_table
+# creating a table thats gives the count of company locations per year in the recent_rating data set. And reveals a table.
+
+which(cross_table[1,]!=0 & cross_table[2,]!=0 & cross_table[3,]!=0 & cross_table[4,]!=0 & cross_table[5,]!=0)
+#in the cross_table it takes all of the countries that have does not have 0 every year from 2012 - 2017.
+
+france_recent = subset(recent_rating,Company.Location =='France')
+uk_recent = subset(recent_rating,Company.Location =='U.K.')
+germany_recent = subset(recent_rating,Company.Location=='Germany')
+#from the data frame recent_ratings creating a subset and calling it "countryname"_recent which finds the recent ratings for the company specific to the country.
+
+par(mfrow=c(2,2))
+color1 = ifelse(france_recent$Rating >median(france_recent$Rating), 'blue', 'green')
+plot(france_recent$Cocoa.Pct ~ france_recent$Review.Date,ylim=c(50,90),col=color1,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "France") 
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('blue','green'),pch=18)
+#par(mfrow=c(2,2)) is setting parameters to the size of the plot that is given and in this case it is 2 units by 2 units. color1 is saying that any number that is over the median is to be labeled in blue and any value below the median is green. plot(france_recent$Cocoa.Pct = is the x value for the plot which is the cocoa percentage from the dataframe for France. france_recent$Review.Date = y value giving the review dates for France. ylim=c(50,90) = setting the y value range ,col=color1 is doing the colors according to how we specified color1 earlier,pch=18 is the character being used in the plot,cex=1.5 is the size of the symbols,xlab="Review Date" is the x label, ylab= "Cocoa Percentage" is the y label, main= "France" is the title of the plot)  legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('blue','green'),pch=18) creates the legend saying that you want it in the bottom right of the plot explaining the value to the colors that were given for color1.
+color2 = ifelse(uk_recent$Rating >median(uk_recent$Rating), 'purple', 'red')
+plot(uk_recent$Cocoa.Pct ~ uk_recent$Review.Date,ylim=c(50,90),col=color2,pch=18,cex=1.5, xlab="Review Date", ylab= "Cocoa Percentage", main= "UK")
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('purple','red'),pch=18)
+
+color3 = ifelse(germany_recent$Rating > median(germany_recent$Rating), 'orange', 'yellow')
+plot(germany_recent$Cocoa.Pct ~ germany_recent$Review.Date,ylim=c(50,90),col=color3,pch=18,cex=1.5,xlab="Review Date", ylab= "Cocoa Percentage", main= "Germany") 
+legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('orange','yellow'),pch=18)
+#these two were similar using different colors and countries
 ```
 
-## R Markdown
+2 \. Click Zoom on the Rstudio window (under Plots) to see the plot more clearly. How do you think the plot produced from the code above can be improved? Recommend at least one possible improvement. 
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+3 \. How does the **number** of ratings (not the actual value of the rating) depend on the year? Use graphics to answer this question.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+4 \. How do ratings compare across different company locations? Focus on the three locations with the most ratings. Hint: the function `sort()` might come in handy here.
 
-```{r cars}
-summary(cars)
-```
+5 \. Brainstorm and write down an interesting question that can be answer from the dataset. The question should not duplicate the questions above.
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+6 \. Bonus points (optional): Answer the question from the dataset.
