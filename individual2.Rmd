@@ -9,4 +9,19 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r, eval=FALSE}
+choco <- read.csv("https://raw.githubusercontent.com/lbchu/ds202_labs/master/choco.csv")
+boxplot(choco$Rating)
+```
+1. How are ratings distributed? Don't forget to mention outliers, if there are any.
+  Dirstibuted from around 2-4 and there is an outlier near 5 and below 2
 
+2. Do ratings depend on the cacao percentage of a chocolate bar? 
+  No there does not because there isnt a correlation across all of the data.
+```{r, eval=FALSE}
+choco <- read.csv("https://raw.githubusercontent.com/lbchu/ds202_labs/master/choco.csv")
+plot(choco$Cocoa.Pct,choco$Rating, xlab = "Rating", ylab = "Cocoa Percent", main = "Cocao percent compared to Rating")
+cor(choco$Cocoa.Pct,choco$Rating)
+```
+3. What class is the variable representing company locations? How is this different from a 'character' variable? (You do not need to produce a graphic for this question.)
+  Its a factor.
