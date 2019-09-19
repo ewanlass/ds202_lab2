@@ -1,31 +1,26 @@
 ---
-title: "ds202_lab2"
+title: "Lab2"
 author: "Ethan Wanlass"
 date: "9/12/2019"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+1. How are ratings distributed? Don't forget to mention outliers, if there are any.
+They are distributed mostly between slightly above 2 and 4 with 5 outliers. One outlier at 5, one outlier at 1 and the rest near 2. 
+```{r}
 choco <- read.csv("https://raw.githubusercontent.com/lbchu/ds202_labs/master/choco.csv")
-head(choco)
+boxplot(choco$Rating)
 ```
 
-## R Markdown
+2. Do ratings depend on the cacao percentage of a chocolate bar? 
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+No, there appears to be very little correlation. 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+plot(choco$Cocoa.Pct,choco$Rating, xlab = "Rating",ylab = "Cocao Percent",main = "Cocao percent compared to Rating")
+cor(choco$Cocoa.Pct,choco$Rating)
 ```
 
-## Including Plots
+3. What class is the variable representing company locations? How is this different from a 'character' variable? (You do not need to produce a graphic for this question.)
+It's a factor. It's different because factors have levels and defined values, whereas characters can be anything.  
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
