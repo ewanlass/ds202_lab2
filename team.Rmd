@@ -59,6 +59,27 @@ For each graph, the number of ratings is the lowest value in 2017 (with the exce
 
 The three locations with the most ratings was USA, Canada and France. All of them averaged around 3.25, but USA had a slighly larger spread than both France and Canada. There wasn't any extreme ratings. None of the ratings were below 1 or above 4. 
 
+Code used to answer it:
+```{r}
+sort(summary(choco$Company.Location),decreasing=TRUE)
+variable = subset(choco, Company.Location=='Canada' | Company.Location == 'U.S.A.' | Company.Location == 'France')
+boxplot(variable$Rating)
+sort(variable$Rating,decreasing = TRUE)
+
+Canada = subset(choco, Company.Location=='Canada')
+USA = subset(choco, Company.Location=='U.S.A.')
+France = subset(choco, Company.Location=='France')
+
+par(mfrow=c(2,2))
+boxplot(Canada$Rating)
+boxplot(USA$Rating)
+boxplot(France$Rating)
+
+mean.default(Canada$Rating)
+mean.default(USA$Rating)
+mean.default(France$Rating)
+```
+
 5 \. Brainstorm and write down an interesting question that can be answer from the dataset. The question should not duplicate the questions above.
 
 What is an estimate of the highest rated cocoa percentage accross all countries? 
