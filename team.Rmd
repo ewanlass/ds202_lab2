@@ -4,6 +4,8 @@ author: "Ethan Wanlass & Hailey Braun"
 date: "9/18/2019"
 output: html_document
 ---
+## GitHub Repository Html
+https://github.com/ewanlass/ds202_lab2
 
 ## Coding Comments
 ```{r, eval=FALSE}
@@ -61,6 +63,8 @@ The three locations with the most ratings was USA, Canada and France. All of the
 
 Code used to answer it:
 ```{r}
+choco <- read.csv("https://raw.githubusercontent.com/lbchu/ds202_labs/master/choco.csv")
+boxplot(choco$Rating)
 sort(summary(choco$Company.Location),decreasing=TRUE)
 variable = subset(choco, Company.Location=='Canada' | Company.Location == 'U.S.A.' | Company.Location == 'France')
 boxplot(variable$Rating)
