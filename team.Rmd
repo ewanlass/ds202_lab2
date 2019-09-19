@@ -1,10 +1,11 @@
 ---
-title: "team.Rmd"
-author: "Ethan Wanlass"
+title: "Team.Rmd"
+author: "Ethan Wanlass & Hailey Braun"
 date: "9/18/2019"
 output: html_document
 ---
 
+## Coding Comments
 ```{r, eval=FALSE}
 recent_rating = choco[choco$Review.Date>2011,]
 #It creates a new data frame that includes all the review rating after 2011
@@ -45,17 +46,20 @@ legend('bottomright',legend=c('High Rating', 'Low Rating'),col=c('orange','yello
 #these two were similar using different colors and countries
 ```
 
+## Additional Questions
 2 \. Click Zoom on the Rstudio window (under Plots) to see the plot more clearly. How do you think the plot produced from the code above can be improved? Recommend at least one possible improvement. 
+
 The legend box could be a bit smaller. 
 
 3 \. How does the **number** of ratings (not the actual value of the rating) depend on the year? Use graphics to answer this question.
+
 For each graph, the number of ratings is the lowest value in 2017 (with the exception of germany with only 1 value in 2013). Otherwise there isn't a consistent pattern amongst the three charts of the number of ratings per company locaiton. 
 
 4 \. How do ratings compare across different company locations? Focus on the three locations with the most ratings. Hint: the function `sort()` might come in handy here.
 
+The three locations with the most ratings was USA, Canada and France. All of them averaged around 3.25, but USA had a slighly larger spread than both France and Canada. There wasn't any extreme ratings. None of the ratings were below 1 or above 4. 
 
 5 \. Brainstorm and write down an interesting question that can be answer from the dataset. The question should not duplicate the questions above.
+
 What is an estimate of the highest rated cocoa percentage accross all countries? 
 
-
-6 \. Bonus points (optional): Answer the question from the dataset.
